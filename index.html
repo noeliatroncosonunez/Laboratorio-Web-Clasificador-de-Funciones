@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Laboratorio Web:Clasificador de Funciones</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Clasificador de Funciones Lineal y Afín</h1>
+
+        <!-- Visualizadores de coeficientes -->
+        <div class="box-coefficient">
+            <strong>b =</strong><span id="val-b">0</span>
+        </div>
+
+        <div class="box-coefficient">
+            <strong>c =</strong><span class="val-c">0</span>
+        </div>
+
+        <!-- Botón Interactivo -->
+        <button id="btn-generar">Generar / Cambiar</button>
+        
+        <!-- Caja para Función Lineal -->
+        <section id="caja-lineal" class="card hidden">
+            <h2>Función Lineal (c = 0)</h2>
+            <p id="exp-lineal" class="expresion"></p>
+            <ul>
+                <li><strong>Gráfica:</strong>Línea recta continua.</li>
+                <li><strong>Paso Obligatorio:</strong>Pasa obligatoriamente por el origen (0, 0)</li>
+                <li id="prop-lineal-pend"></li>
+            </ul>
+        </section>
+
+        <section id="caja-lineal" class="card hidden">
+            <h2>Función Afín (c ≠ 0)</h2>
+            <p id="exp-lineal" class="expresion"></p>
+            <ul>
+                <li><strong>Gráfica:</strong>Línea recta que no pasa por el origen</li>
+                <li id="prop-afin-corte"></li>
+                <li><strong>Inclinación:</strong>Regulada por el valor del coeficiente de pendiente b.</li>
+                <li id="prop-afin-tras"></li>
+            </ul>
+        </section>
+
+        <!-- Enlace a GeoGebra y Sección GitHub -->
+        <div class="footer-links">
+            <p><strong>Enlace:</strong><a href="https://www.geogebra.org/classic?lang=es" target="_blank"  rel="noopener">GeoGebra Clásico</a></p>
+            <p><strong>Acción:</strong>Sube tu archivo <code>.ggb</code>descargado a tu repositorio en GitHub[cite: 1, 2, 3].</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
