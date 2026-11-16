@@ -173,4 +173,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Render inicial al cargar la página
   drawGraph(0, 0);
-});S
+});
