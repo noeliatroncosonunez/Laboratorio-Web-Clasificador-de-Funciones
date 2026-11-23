@@ -1,264 +1,356 @@
-/* Variables Globales */
+/* Colores compartidos por los distintos componentes de la pagina */
 :root {
-  --primary-color: #2b4c7e;
-  --secondary-color: #4a7c59;
-  --bg-color: #f4f6f9;
-  --card-bg: #ffffff;
-  --disabled-bg: #eef2f5;
-  --border-color: #d1d5db;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  --accent-active: #2563eb;
+  --ink: #27352f;
+  --muted: #70786e;
+  --line: #e5ddcb;
+  --paper: #fffdf7;
+  --canvas: #f7f3e8;
+  --blue: #236653;
+  --blue-dark: #184b3f;
+  --violet: #c16a42;
+  --green: #28745a;
+  --green-soft: #edf4ec;
+  --shadow: 0 18px 50px rgba(43, 54, 39, 0.10);
 }
 
-* {
-  box-sizing: border-box;
+/* Elimina espacios por defecto y facilita el calculo de tamaños */
+* { box-sizing: border-box; }
+
+/* Estilo general de la pagina */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(193, 106, 66, 0.12), transparent 18rem),
+    linear-gradient(145deg, #fbf8ef 0%, #eee7d8 100%);
+}
+
+button, input { font: inherit; }
+
+/* Limita el ancho del contenido y lo centra */
+.contenedor-aplicacion {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 26px 0 40px;
+}
+
+.barra-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+/* Identidad visual y datos de la estudiante */
+.marca { display: flex; align-items: center; gap: 13px; }
+.simbolo-marca {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-style: italic;
+  box-shadow: 0 10px 24px rgba(35, 102, 83, 0.22);
+}
+
+.subtitulo-marca, .etiqueta-seccion {
+  margin: 0 0 4px;
+  color: var(--violet);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.marca h1 { margin: 0; font-size: 1.18rem; letter-spacing: -0.02em; }
+.marca h1, .texto-presentacion h2, .encabezado-panel h2, .encabezado-tarjeta h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.ficha-estudiante {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px 7px 7px;
+  border: 1px solid rgba(229, 221, 203, 0.9);
+  border-radius: 40px;
+  background: rgba(255, 253, 247, 0.82);
+}
+
+.ficha-estudiante strong, .ficha-estudiante small { display: block; }
+.ficha-estudiante strong { font-size: 0.82rem; }
+.ficha-estudiante small { margin-top: 2px; color: var(--muted); font-size: 0.72rem; }
+.avatar-estudiante {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.panel-principal { display: flex; flex-direction: column; gap: 18px; }
+
+/* Tarjeta introductoria y controles de los coeficientes */
+.tarjeta-presentacion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 30px;
+  padding: 26px 28px;
+  border: 1px solid rgba(229, 221, 203, 0.9);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.texto-presentacion h2 {
+  margin: 4px 0 7px;
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  letter-spacing: -0.045em;
+}
+.texto-presentacion p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+.controles {
+  display: grid;
+  grid-template-columns: repeat(2, 112px) auto;
+  gap: 10px;
+  min-width: 0;
   margin: 0;
   padding: 0;
+  border: 0;
 }
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+.coeficiente {
+  min-height: 74px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--canvas);
 }
+.coeficiente span { display: block; margin-bottom: 7px; color: var(--muted); font-size: 0.72rem; }
+.coeficiente strong { font-size: 1.05rem; }
+.coeficiente b { color: var(--blue); font-size: 1.35rem; }
 
-.container {
-  width: 100%;
-  max-width: 650px;
-  background: var(--card-bg);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 15px;
-}
-
-.header h1 {
-  font-size: 1.4rem;
-  color: var(--primary-color);
-}
-
-.header p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 5px;
-}
-
-.id-card {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f0f4f8;
-  padding: 10px 15px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  border-left: 4px solid var(--primary-color);
-}
-
-.vertical-schema {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.coeff-box {
+.boton-principal {
   display: flex;
   align-items: center;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 12px 16px;
-  background: #fafafa;
+  justify-content: center;
+  gap: 9px;
+  min-height: 74px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  background: var(--blue);
+  box-shadow: 0 10px 20px rgba(35, 102, 83, 0.20);
+  font-weight: 800;
+  cursor: pointer;
+  transition: 180ms ease;
+}
+.boton-principal span { font-size: 1.25rem; }
+.boton-principal:hover { background: var(--blue-dark); transform: translateY(-2px); }
+.boton-principal:active { transform: translateY(0); }
+
+/* Panel que contiene el grafico de GeoGebra */
+.area-trabajo {
+  display: block;
 }
 
-.coeff-label {
-  font-weight: bold;
-  font-size: 1.2rem;
-  width: 40px;
-  color: var(--primary-color);
+.panel-grafico, .panel-clasificacion {
+  border: 1px solid rgba(229, 221, 203, 0.9);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 12px 35px rgba(43, 54, 39, 0.07);
 }
 
-.coeff-value {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1.1rem;
-  color: var(--text-main);
-  flex-grow: 1;
-  text-align: center;
-}
+.panel-grafico { padding: 20px; }
+.panel-clasificacion { padding: 20px; }
 
-.btn-primary {
-  padding: 14px;
+.encabezado-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+  margin-bottom: 14px;
+}
+.encabezado-panel h2 { margin: 0; font-size: 1.08rem; }
+.encabezado-panel.compacto { margin-bottom: 10px; }
+
+.ecuacion {
+  max-width: 70%;
+  padding: 10px 14px;
+  border: 1px solid #e8dcc7;
+  border-radius: 10px;
+  color: var(--blue-dark);
+  background: #f8f2e6;
+  font-family: "Courier New", monospace;
   font-size: 1rem;
-  font-weight: bold;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.btn-primary:hover {
-  background-color: #1d3557;
-}
-
-.btn-primary:active {
-  transform: scale(0.99);
-}
-
-.equation-display {
+  font-weight: 800;
   text-align: center;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #1e293b;
-  padding: 8px;
-  background: #e2e8f0;
-  border-radius: 6px;
-  font-family: 'Courier New', Courier, monospace;
 }
 
-.canvas-container {
-  display: flex;
-  justify-content: center;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 10px;
+/* Espacio donde se carga el plano cartesiano interactivo */
+.contenedor-grafico {
+  overflow: hidden;
+  min-height: 460px;
+  margin: 0;
+  border: 1px solid #e9e2d4;
+  border-radius: 16px;
+  background: var(--canvas);
 }
-
-canvas {
-  background-color: #fcfcfc;
-  border-radius: 4px;
+#geogebra-container { width: 100%; min-height: 460px; }
+#geogebra-container > div, #geogebra-container iframe { max-width: 100%; }
+.estado-geogebra {
+  margin: 10px 2px 0;
+  color: var(--muted);
+  font-size: 0.76rem;
 }
+.estado-geogebra.error { color: #b42318; }
 
-/* Cajas de Clasificación */
-.card-box {
-  border: 2px dashed var(--border-color);
-  border-radius: 8px;
+/* Tarjetas que explican los cuatro tipos de funcion */
+.panel-clasificacion {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid rgba(229, 221, 203, 0.9);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 12px 35px rgba(43, 54, 39, 0.07);
+}
+.panel-clasificacion .encabezado-panel, .nota-clasificacion { grid-column: 1 / -1; }
+.tarjeta-clasificacion {
+  min-height: 0;
   padding: 16px;
-  background-color: var(--disabled-bg);
-  opacity: 0.6;
-  transition: all 0.3s ease;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fffdf8;
+  opacity: 0.68;
+  transition: 220ms ease;
 }
-
-.card-box.active {
-  border: 2px solid var(--secondary-color);
-  background-color: #f0fdf4;
+.tarjeta-clasificacion.activa {
+  border-color: #bed4bd;
+  background: var(--green-soft);
   opacity: 1;
-  box-shadow: 0 2px 8px rgba(74, 124, 89, 0.15);
+  box-shadow: inset 3px 0 0 var(--green);
 }
-
-.box-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+.encabezado-tarjeta { display: flex; align-items: center; justify-content: space-between; }
+.encabezado-tarjeta h3 { margin: 0; font-size: 1rem; }
+.insignia {
+  flex-shrink: 0;
+  padding: 5px 8px;
+  border-radius: 20px;
+  color: #77786e;
+  background: #eee9dc;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
 }
-
-.box-header h3 {
-  font-size: 1.1rem;
-  color: var(--primary-color);
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 3px 8px;
-  border-radius: 12px;
-  background-color: #9ca3af;
-  color: white;
-  font-weight: bold;
-}
-
-.card-box.active .badge {
-  background-color: var(--secondary-color);
-}
-
-.box-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-}
-
-.props-list {
+.tarjeta-clasificacion.activa .insignia { color: #fff; background: var(--green); }
+.descripcion-tarjeta { margin: 10px 0 0; color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
+.lista-propiedades {
+  margin: 12px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(40, 116, 90, 0.18);
   list-style: none;
-  font-size: 0.9rem;
-  border-top: 1px solid var(--border-color);
-  padding-top: 10px;
+  color: #515b50;
+  font-size: 0.76rem;
+  line-height: 1.55;
 }
-
-.props-list li {
-  margin-bottom: 6px;
-  line-height: 1.4;
-}
-
-.hidden {
-  display: none;
-}
-
-/* Recursos y Upload */
-.resources-section {
-  margin-top: 10px;
-  padding: 15px;
-  background-color: #f8fafc;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.resources-section a {
-  color: var(--accent-active);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.resources-section a:hover {
-  text-decoration: underline;
-}
-
-code {
-  background: #e2e8f0;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: monospace;
-}
-
-.upload-zone {
-  margin-top: 5px;
-}
-
-.upload-label {
-  display: inline-block;
-  padding: 8px 14px;
-  background-color: #e2e8f0;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.85rem;
-}
-
-.upload-label:hover {
-  background-color: #cbd5e1;
-}
-
-#ggb-file {
-  display: none;
-}
-
-.file-info {
-  margin-top: 5px;
-  font-style: italic;
-  color: var(--text-muted);
+.lista-propiedades li { margin: 3px 0; }
+.oculto { display: none; }
+.nota-clasificacion {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #6b4c3b;
+  background: #f8eee4;
   font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* Enlace a GeoGebra y control para adjuntar archivos */
+.seccion-recursos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 16px;
+  border: 1px solid rgba(229, 221, 203, 0.9);
+  border-radius: 18px;
+  background: rgba(255, 253, 247, 0.9);
+}
+.recurso-informativo { display: flex; align-items: center; gap: 12px; }
+.icono-recurso {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #fff;
+  background: #344a3f;
+  font-weight: 900;
+}
+.recurso-informativo strong { font-size: 0.86rem; }
+.recurso-informativo p { margin: 3px 0 0; color: var(--muted); font-size: 0.76rem; }
+.recurso-informativo a { margin-left: 12px; color: var(--blue); font-size: 0.78rem; font-weight: 800; text-decoration: none; }
+.recurso-informativo a:hover { text-decoration: underline; }
+
+.zona-carga { display: flex; align-items: center; gap: 10px; }
+.etiqueta-carga {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.etiqueta-carga span { color: var(--blue); font-size: 1rem; }
+#ggb-file { display: none; }
+.informacion-archivo { max-width: 210px; color: var(--muted); font-size: 0.72rem; }
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 900px) {
+  .tarjeta-presentacion { grid-template-columns: 1fr; }
+  .controles { grid-template-columns: repeat(2, 1fr) auto; }
+  .contenedor-grafico, #geogebra-container { min-height: 400px; }
+  .panel-clasificacion { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Ajustes para telefonos */
+@media (max-width: 620px) {
+  .contenedor-aplicacion { width: min(100% - 24px, 1180px); padding-top: 14px; }
+  .barra-superior { align-items: flex-start; }
+  .simbolo-marca { width: 42px; height: 42px; }
+  .marca h1 { font-size: 1rem; }
+  .subtitulo-marca { display: none; }
+  .ficha-estudiante { padding-right: 7px; }
+  .ficha-estudiante > div { display: none; }
+  .tarjeta-presentacion { padding: 20px; }
+  .controles { grid-template-columns: 1fr 1fr; }
+  .boton-principal { grid-column: 1 / -1; min-height: 58px; }
+  .panel-grafico, .panel-clasificacion { padding: 14px; }
+  .encabezado-panel { align-items: flex-start; }
+  .ecuacion { max-width: 55%; font-size: 0.82rem; }
+  .contenedor-grafico, #geogebra-container { min-height: 340px; }
+  .panel-clasificacion { grid-template-columns: 1fr; padding: 14px; }
+  .panel-clasificacion .encabezado-panel, .nota-clasificacion { grid-column: auto; }
+  .seccion-recursos { align-items: flex-start; flex-direction: column; }
+  .recurso-informativo { flex-wrap: wrap; }
+  .recurso-informativo a { width: 100%; margin-left: 54px; }
+  .zona-carga { width: 100%; align-items: flex-start; flex-direction: column; }
+  .informacion-archivo { max-width: 100%; }
 }

@@ -7,94 +7,153 @@
   <title>Clasificador de Funciones: Lineal y Afín</title>
 </head>
 <body>
+  <!-- Contenedor general de la pagina -->
+  <div class="contenedor-aplicacion">
+    <!-- Encabezado con el nombre del laboratorio y los datos de la estudiante -->
+    <header class="barra-superior">
+      <div class="marca">
+        <span class="simbolo-marca" aria-hidden="true">ƒ</span>
+        <div>
+          <p class="subtitulo-marca">Laboratorio matemático</p>
+          <h1>Clasificador de funciones</h1>
+        </div>
+      </div>
 
-  <div class="container">
-    <!-- Encabezado -->
-    <header class="header">
-      <h1>Laboratorio Web: Clasificador de Funciones</h1>
-      <p>Unidad: Funciones Algebraicas (Función Lineal y Función Afín)</p>
+      <div class="ficha-estudiante">
+        <span class="avatar-estudiante">NT</span>
+        <div>
+          <strong>Noelia Troncoso</strong>
+          <small id="current-date">--/--/----</small>
+        </div>
+      </div>
     </header>
 
-    <!-- Ficha de Identificación -->
-    <section class="id-card">
-      <div class="field"><strong>Estudiante:</strong> <span>Noelia Troncoso</span></div>
-      <div class="field"><strong>Fecha:</strong> <span id="current-date">--/--/----</span></div>
-      <div class="field"><strong>Curso:</strong> <span>Matemáticas & Programación</span></div>
-    </section>
+    <!-- Contenido principal: controles, grafico y clasificacion -->
+    <main class="panel-principal">
+      <!-- Presentacion y controles para generar los coeficientes -->
+      <section class="tarjeta-presentacion">
+        <header class="texto-presentacion">
+          <span class="etiqueta-seccion">Función de primer grado</span>
+          <h2>Explora la pendiente y la ordenada</h2>
+          <p>Genera una función aleatoria y observa sus propiedades y su gráfica en GeoGebra Classic.</p>
+        </header>
 
-    <!-- UI Principal / Esquema Vertical -->
-    <main class="vertical-schema">
+        <fieldset class="controles" aria-label="Coeficientes y generación de la función">
+          <output class="coeficiente" aria-label="Valor de la pendiente b">
+            <span>Pendiente</span>
+            <strong>b = <b id="val-b">3</b></strong>
+          </output>
 
-      <!-- Coeficiente b -->
-      <div class="coeff-box">
-        <span class="coeff-label">b =</span>
-        <div class="coeff-value" id="val-b">[ Random (-3 a 3) ]</div>
-      </div>
+          <output class="coeficiente" aria-label="Valor de la ordenada c">
+            <span>Ordenada</span>
+            <strong>c = <b id="val-c">-3</b></strong>
+          </output>
+          
+          <button id="btn-generate" class="boton-principal" type="button">
+            <span aria-hidden="true">↻</span>
+            Generar / cambiar
+          </button>
+        </fieldset>
+      </section>
 
-      <!-- Coeficiente c -->
-      <div class="coeff-box">
-        <span class="coeff-label">c =</span>
-        <div class="coeff-value" id="val-c">[ Random (-3 a 3) ]</div>
-      </div>
+      <!-- GeoGebra muestra la grafica de la funcion generada -->
+      <section class="area-trabajo">
+        <article class="panel-grafico">
+          <header class="encabezado-panel">
+            <div>
+              <span class="etiqueta-seccion">Visualización</span>
+              <h2>Plano cartesiano GeoGebra Classic</h2>
+            </div>
+            <output id="equation-display" class="ecuacion">f(x) = bx + c</output>
+          </header>
+          <figure class="contenedor-grafico">
+            <div id="geogebra-container" aria-label="Plano cartesiano interactivo de GeoGebra Classic"></div>
+          </figure>
+          <p id="geogebra-status" class="estado-geogebra" role="status">Conectando con GeoGebra Classic...</p>
+        </article>
+      </section>
 
-      <!-- Botón de Generación -->
-      <button id="btn-generate" class="btn-primary">[ Generar / Cambiar ]</button>
+      <!-- Casos posibles segun los valores de b y c -->
+      <section class="panel-clasificacion" aria-labelledby="classification-title">
+        <header class="encabezado-panel compacto">
+          <h2 id="classification-title">Clasificación de la función</h2>
+        </header>
 
-      <!-- Expresión matemática actual -->
-      <div id="equation-display" class="equation-display">
-        f(x) = bx + c
-      </div>
+        <article id="box-afin" class="tarjeta-clasificacion">
+          <header class="encabezado-tarjeta">
+            <h3>Función afín</h3>
+            <span class="insignia" id="badge-afin">Esperando</span>
+          </header>
+          <p class="descripcion-tarjeta"><strong>b ≠ 0, c ≠ 0</strong></p>
+          <ul id="props-afin" class="lista-propiedades">
+            <li><strong>Forma:</strong> <span id="formula-afin">f(x) = bx + c</span></li>
+            <li>Recta que no pasa por el origen.</li>
+            <li><strong>Corte con Y:</strong> (0, <span id="corte-y">c</span>)</li>
+            <li><strong>Pendiente:</strong> <span id="slope-afin">—</span></li>
+            <li><strong>Traslación vertical:</strong> <span id="units-c">c</span></li>
+          </ul>
+        </article>
 
-      <!-- Gráfico interactivo en vivo -->
-      <div class="canvas-container">
-        <canvas id="graphCanvas" width="400" height="240"></canvas>
-      </div>
+        <article id="box-lineal" class="tarjeta-clasificacion">
+          <header class="encabezado-tarjeta">
+            <h3>Función lineal</h3>
+            <span class="insignia" id="badge-lineal">Esperando</span>
+          </header>
+          <p class="descripcion-tarjeta"><strong>b ≠ 0, c = 0</strong></p>
+          <ul id="props-lineal" class="lista-propiedades">
+            <li><strong>Forma:</strong> <span id="formula-lineal">f(x) = bx</span></li>
+            <li>Recta que pasa por el origen (0, 0).</li>
+            <li><strong>Pendiente:</strong> <span id="slope-lineal">—</span></li>
+          </ul>
+        </article>
 
-      <!-- Caja de Clasificación: LINEAL -->
-      <div id="box-lineal" class="card-box">
-        <div class="box-header">
-          <h3>LINEAL</h3>
-          <span class="badge" id="badge-lineal">Evaluando...</span>
-        </div>
-        <p class="box-desc">Muestra la lista de propiedades de la Función Lineal si cumple la condición (<strong>c = 0</strong>).</p>
-        <ul id="props-lineal" class="props-list hidden">
-          <li><strong>Forma General:</strong> <span id="formula-lineal">f(x) = bx</span></li>
-          <li><strong>Gráfica:</strong> Línea recta continua.</li>
-          <li><strong>Paso Obligatorio:</strong> Pasa por el origen de coordenadas (0, 0).</li>
-          <li><strong>Comportamiento de la Pendiente (b):</strong> <span id="slope-lineal">--</span></li>
-        </ul>
-      </div>
+        <article id="box-constant" class="tarjeta-clasificacion">
+          <header class="encabezado-tarjeta">
+            <h3>Función constante</h3>
+            <span class="insignia" id="badge-constant">Esperando</span>
+          </header>
+          <p class="descripcion-tarjeta"><strong>b = 0, c ≠ 0</strong></p>
+          <ul class="lista-propiedades">
+            <li><strong>Forma:</strong> <span id="formula-constant">f(x) = c</span></li>
+            <li>Recta horizontal que no coincide con el eje X.</li>
+          </ul>
+        </article>
 
-      <!-- Caja de Clasificación: AFÍN -->
-      <div id="box-afin" class="card-box">
-        <div class="box-header">
-          <h3>AFÍN</h3>
-          <span class="badge" id="badge-afin">Evaluando...</span>
-        </div>
-        <p class="box-desc">Muestra la lista de propiedades de la Función Afín si cumple la condición (<strong>c ≠ 0</strong>).</p>
-        <ul id="props-afin" class="props-list hidden">
-          <li><strong>Forma General:</strong> <span id="formula-afin">f(x) = bx + c</span></li>
-          <li><strong>Gráfica:</strong> Línea recta que no pasa por el origen.</li>
-          <li><strong>Corte Eje Y:</strong> Interseca al eje Y en las coordenadas (0, <span id="corte-y">c</span>).</li>
-          <li><strong>Inclinación:</strong> Regulada por el valor del coeficiente de pendiente b (<span id="slope-afin">--</span>).</li>
-          <li><strong>Traslación:</strong> Traslación vertical de la función lineal f(x) = bx en <span id="units-c">c</span> unidades.</li>
-        </ul>
-      </div>
+        <article id="box-zero" class="tarjeta-clasificacion">
+          <header class="encabezado-tarjeta">
+            <h3>Sin Función</h3>
+            <span class="insignia" id="badge-zero">Esperando</span>
+          </header>
+          <p class="descripcion-tarjeta"><strong>b = 0, c = 0</strong></p>
+          <ul class="lista-propiedades">
+            <li><strong>Forma:</strong> f(x) = 0</li>
+            <li>Es una función constante; su gráfica es el eje X.</li>
+          </ul>
+        </article>
 
-      <!-- Sección de Recursos y Carga de Archivos -->
-      <footer class="resources-section">
-        <p><strong>ENLACE:</strong> GeoGebra Clásico (<a href="https://www.geogebra.org/classic" target="_blank" rel="noopener">geogebra.org/classic</a>)</p>
-        <p><strong>ACCIÓN:</strong> Subir / Guardar archivo <code>.ggb</code> a GitHub</p>
+        <p class="nota-clasificacion"><strong>Nota:</strong> Cuando b = 0 y c = 0 sí hay una función: se llama función nula (f(x) = 0). No es “no hay función”.</p>
+      </section>
 
-        <div class="upload-zone">
-          <label for="ggb-file" class="upload-label">
-            📁 Seleccionar archivo .ggb para adjuntar
+      <!-- Enlace a GeoGebra y seleccion de un archivo de construccion -->
+      <footer class="seccion-recursos">
+        <section class="recurso-informativo" aria-label="Recurso de GeoGebra">
+          <span class="icono-recurso" aria-hidden="true">G</span>
+          <div>
+            <strong>GeoGebra Clásico</strong>
+            <p>Modela la función y guarda tu construcción.</p>
+          </div>
+          <a href="https://www.geogebra.org/classic" target="_blank" rel="noopener">Abrir GeoGebra ↗</a>
+        </section>
+
+        <section class="zona-carga" aria-label="Carga de archivo de GeoGebra">
+          <label for="ggb-file" class="etiqueta-carga">
+            <span aria-hidden="true">＋</span>
+            Adjuntar archivo .ggb
           </label>
           <input type="file" id="ggb-file" accept=".ggb">
-          <div id="file-info" class="file-info">Ningún archivo cargado todavía</div>
-        </div>
+          <output id="file-info" class="informacion-archivo">No hay archivos seleccionados</output>
+        </section>
       </footer>
-
     </main>
   </div>
 
